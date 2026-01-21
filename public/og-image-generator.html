@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>OG Image Generator</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      width: 1200px; 
+      height: 630px; 
+      font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    }
+    .card {
+      width: 1200px;
+      height: 630px;
+      background: linear-gradient(135deg, #003f72 0%, #002e52 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px;
+    }
+    .icon-container {
+      width: 200px;
+      height: 200px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+    .bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+      height: 120px;
+    }
+    .bar {
+      width: 28px;
+      border-radius: 4px;
+    }
+    .bar1 { height: 70px; background: #ffffff; }
+    .bar2 { height: 100px; background: #02bfe7; }
+    .bar3 { height: 85px; background: #ffffff; }
+    .bar4 { height: 120px; background: #02bfe7; }
+    .title {
+      font-size: 52px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .subtitle {
+      font-size: 28px;
+      color: #02bfe7;
+      margin-bottom: 60px;
+    }
+    .divider {
+      width: 80%;
+      height: 2px;
+      background: rgba(255,255,255,0.3);
+      margin-bottom: 24px;
+    }
+    .footer {
+      font-size: 20px;
+      color: rgba(255,255,255,0.7);
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon-container">
+      <div class="bars">
+        <div class="bar bar1"></div>
+        <div class="bar bar2"></div>
+        <div class="bar bar3"></div>
+        <div class="bar bar4"></div>
+      </div>
+    </div>
+    <div class="title">SECVA Social Media Analytics</div>
+    <div class="subtitle">Multi-Platform Report Generator</div>
+    <div class="divider"></div>
+    <div class="footer">VA Digital Communications | DME Team</div>
+  </div>
+</body>
+</html>
