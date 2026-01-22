@@ -96,7 +96,7 @@ function App() {
     }, 100);
     
     return () => clearTimeout(timer);
-  }, [normalizedData, periodRange, coverage, hasRequiredData]);
+  }, [normalizedData, periodRange, coverage, hasRequiredData, selectedPeriod]);
 
   return (
     <div className="min-h-screen bg-gray-100">
