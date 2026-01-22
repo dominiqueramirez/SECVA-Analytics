@@ -15,7 +15,7 @@ function App() {
   const [parsedFiles, setParsedFiles] = useState([]);
   const [normalizedData, setNormalizedData] = useState(null);
   const [dataRange, setDataRange] = useState(null);
-  const [selectedPeriod, setSelectedPeriod] = useState(3); // Default to 3 months
+  const [selectedPeriod, setSelectedPeriod] = useState(12); // Default to 1 year
   const [reportData, setReportData] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -76,14 +76,16 @@ function App() {
     return hasPosts;
   }, [normalizedData]);
 
-  // Generate report
-  const handleGenerateReport = () => {
-    if (!normalizedData || !periodRange || !coverage) return;
+  // Auto-generate report when data or period changes
+  useEffect(() => {
+    if (!normalizedData || !periodRange || !coverage || !hasRequiredData) {
+      return;
+    }
     
     setIsGenerating(true);
     
     // Use setTimeout to allow UI to update
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       const report = generateReport(
         normalizedData,
         coverage.actualStart,
@@ -92,7 +94,9 @@ function App() {
       setReportData(report);
       setIsGenerating(false);
     }, 100);
-  };
+    
+    return () => clearTimeout(timer);
+  }, [normalizedData, periodRange, coverage, hasRequiredData]);
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -121,23 +125,14 @@ function App() {
           coverage={coverage}
         />
 
-        {/* Generate Button */}
-        <div className="flex justify-center">
-          <button
-            onClick={handleGenerateReport}
-            disabled={!hasRequiredData || isGenerating}
-            className={`
-              px-8 py-3 rounded-lg font-semibold text-lg
-              transition-all duration-200 shadow-md
-              ${hasRequiredData && !isGenerating
-                ? 'bg-va-blue text-white hover:bg-va-blue-dark hover:shadow-lg'
-                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-              }
-            `}
-          >
-            {isGenerating ? 'Generating Report...' : 'Generate Report'}
-          </button>
-        </div>
+        {/* Loading Indicator */}
+        {isGenerating && (
+          <div className="flex justify-center">
+            <div className="bg-va-blue text-white px-6 py-3 rounded-lg font-medium shadow-md">
+              Generating Report...
+            </div>
+          </div>
+        )}
 
         {/* Missing Data Warning */}
         {parsedFiles.length > 0 && !hasRequiredData && (
